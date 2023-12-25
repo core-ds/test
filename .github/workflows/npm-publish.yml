@@ -70,10 +70,12 @@ jobs:
           npm_token: ${{ secrets.NPM_AUTH_TOKEN }} # user set secret token generated at npm
       - run: echo ${{ steps.npm-bump.outputs.release_tag }}
 
-      - name: CHECK
-      - run: echo ${{ secrets.BOT_AUTH_TOKEN }}
-      - run: echo ${{ secrets.BOT_EMAIL }}
-      - run: echo ${{ secrets.BOT_USERNAME }}
+      - name: CHECK1
+        run: echo ${{ secrets.BOT_AUTH_TOKEN }}
+      - name: CHECK2
+        run: echo ${{ secrets.BOT_EMAIL }}
+      - name: CHECK3
+        run: echo ${{ secrets.BOT_USERNAME }}
       
       - name: Version beta and publish to npm
         if: github.event.inputs.version == 'beta'
