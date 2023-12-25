@@ -72,7 +72,9 @@ jobs:
       - run: echo ${{ steps.npm-bump.outputs.release_tag }}
 
       - name: Check github.actor
-        run: echo ${{ github.actor }}
+        run: |
+          cp package.json .publish/package.json
+          cd .publish
       
       - name: Version beta and publish to npm
         if: github.event.inputs.version == 'beta'
