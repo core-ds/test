@@ -82,7 +82,7 @@ jobs:
           git_email: ${{ secrets.BOT_EMAIL }}
           git_username: ${{ github.actor }}
           newversion: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
-          push_version_commit: false # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
+          push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
           # github_token: ${{ secrets.BOT_AUTH_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
           npm_token: ${{ secrets.NPM_AUTH_TOKEN }} # user set secret token generated at npm
       - run: echo ${{ steps.npm-bumpp.outputs.release_tag }}
