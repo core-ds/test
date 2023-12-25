@@ -65,6 +65,7 @@ jobs:
         id: npm-bump
         uses: bcomnes/npm-bump@v2
         with:
+          working-directory: .public
           newversion: ${{ github.event.inputs.version }}
           push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
           github_token: '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' # built in actions token.  Passed tp gh-release if in use.
