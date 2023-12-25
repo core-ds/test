@@ -34,9 +34,12 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
-          ref: ${{ github.ref_name }}
+          # ref: ${{ github.ref_name }}
+          ref: 'main'
+          fetch-depth: 0
+          token: ${{ secrets.BOT_AUTH_TOKEN }}
 
       - name: Install dependencies
         run: yarn
@@ -84,7 +87,7 @@ jobs:
           push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
           github_token: ${{ secrets.BOT_AUTH_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
           npm_token: ${{ secrets.NPM_AUTH_TOKEN }} # user set secret token generated at npm
-      - run: echo ${{ secrets.CI_USER_NAME }}
+      - run: echo ${{ steps.npm-bumpp.outputs.release_tag }}
 
           #- name: Publish beta version
           # if: github.event.inputs.version == 'beta'
