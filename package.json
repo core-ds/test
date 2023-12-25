@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "bridge-to-am-test",
-    "version": "0.0.1-beta.9d6afce",
+    "version": "0.0.1-beta.9d6afce-beta.f07e6a6",
     "main": "",
     "scripts": {
         "build": "yarn lib:compile",
