@@ -1,0 +1,98 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      features:
+        type: text
+        description: changelog features
+
+      bugfixes:
+        type: text
+        description: changelog bugfixes
+
+      breaking-changes:
+        type: text
+        description: changelog breaking changes
+
+      version:
+        type: choice
+        description: Choose which version to release
+        options:
+          - beta
+          - patch
+          - minor
+          - major
+
+jobs:
+  build:
+    env:
+      CI: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build app
+        run: yarn build
+
+      - name: Set NPM Token
+        uses: filipstefansson/set-npm-token-action@v1
+        with:
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Set last commit sha
+        if: github.event.inputs.version == 'beta'
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Get current version
+        if: github.event.inputs.version == 'beta'
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Version release and publish to npm
+        if: github.event.inputs.version != 'beta'
+        id: npm-bump
+        uses: bcomnes/npm-bump@v2
+        with:
+          git_email: bcomnes@gmail.com
+          git_username: ${{ github.actor }}
+          newversion: ${{ github.event.inputs.version }}
+          push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
+          github_token: ${{ secrets.GITHUB_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
+          npm_token: ${{ secrets.NPM_AUTH_TOKEN }} # user set secret token generated at npm
+      - run: echo ${{ steps.npm-bump.outputs.release_tag }}
+
+      - name: Version beta and publish to npm
+        if: github.event.inputs.version == 'beta'
+        id: npm-bumpp
+        uses: bcomnes/npm-bump@v2
+        with:
+          git_email: bcomnes@gmail.com
+          git_username: ${{ github.actor }}
+          newversion: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
+          push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
+          github_token: ${{ secrets.GITHUB_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
+          npm_token: ${{ secrets.NPM_AUTH_TOKEN }} # user set secret token generated at npm
+      - run: echo ${{ steps.npm-bumpp.outputs.release_tag }}
+
+          #- name: Publish beta version
+          # if: github.event.inputs.version == 'beta'
+          #run: npm run pub:beta
+          #env:
+          # BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
+
+          #- name: Publish release version
+          # if: github.event.inputs.version != 'beta'
+          #run: npm run pub:release
+          #env:
+        # RELEASE_VERSION: ${{ github.event.inputs.version}}
