@@ -63,4 +63,5 @@ jobs:
         if: github.event.inputs.version == 'beta'
         run: npm run lib:release:beta
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
