@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test",
-    "version": "0.0.5",
+    "version": "0.0.3",
     "main": "",
     "scripts": {
         "build": "yarn lib:compile",
@@ -16,9 +16,9 @@
         "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,json}\"",
         "lib:test": "jest --silent --collect-coverage",
         "test": "yarn lib:test",
-        "lib:release:patch": "npm version patch && yarn lib:compile &&  yarn standard-version --release-as patch && yarn lib:pub",
-        "lib:release:minor": "npm version minor && yarn lib:compile &&  yarn standard-version --release-as minor && yarn lib:pub",
-        "lib:release:major": "npm version major && yarn lib:compile &&  yarn standard-version --release-as major && yarn lib:pub",
+        "lib:release:patch": "yarn lib:compile &&  yarn standard-version --release-as patch && yarn lib:pub",
+        "lib:release:minor": "yarn lib:compile &&  yarn standard-version --release-as minor && yarn lib:pub",
+        "lib:release:major": "yarn lib:compile &&  yarn standard-version --release-as major && yarn lib:pub",
         "lib:release:beta": "yarn lib:compile && yarn lib:compile:copy-package-json && yarn lib:pub:beta",
         "lib:pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin main",
         "lib:pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta"
