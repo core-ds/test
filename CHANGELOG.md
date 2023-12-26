@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
 
+### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
+
 ### [0.0.7](https://github.com/core-ds/test/compare/v0.0.6...v0.0.7) (2023-12-26)
 
 ### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
