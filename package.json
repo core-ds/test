@@ -1,6 +1,6 @@
 {
     "license": "UNLICENSED",
-    "name": "bridge-to-am-test",
+    "name": "@alfalab/bridge-to-am-test",
     "version": "0.0.1",
     "main": "",
     "scripts": {
