@@ -61,16 +61,8 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: Publish beta version
-        if: github.event.inputs.version == 'beta'
-        run: npm run lib:pub:beta
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
-
-      - name: Publish release version
-        if: github.event.inputs.version != 'beta'
-        run: npm run lib:pub
+      - name: Publish ${{ github.event.inputs.version }} version
+        run: npm run lib:release:${{ github.event.inputs.version }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
