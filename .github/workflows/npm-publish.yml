@@ -62,6 +62,6 @@ jobs:
 
       - name: Publish beta version
         if: github.event.inputs.version == 'beta'
-        run: yarn lib:release:beta
+        run: npm lib:release:beta
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
