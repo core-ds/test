@@ -47,7 +47,7 @@ jobs:
       - name: Set NPM Token
         uses: filipstefansson/set-npm-token-action@v1
         with:
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
 
       - name: Set last commit sha for beta release
         if: github.event.inputs.version == 'beta'
