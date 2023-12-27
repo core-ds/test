@@ -43,6 +43,8 @@ jobs:
       - run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
       # Установка зависимостей
       - name: Install dependencies
@@ -86,5 +88,5 @@ jobs:
         run: npm run lib:release:${{ github.event.inputs.version }}
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
-          BRANCH: ${{ GITHUB_REF#refs/heads/ }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch}}
 
