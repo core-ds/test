@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 4.0.1 (2023-12-27)
+
+### Features
+
+-   test2 ([08d0b91](https://github.com/core-ds/test/commit/08d0b91dbe299f2e210389825c20a7e0bc962ad2))
+
 ## 4.0.0 (2023-12-27)
 
 ### Features
