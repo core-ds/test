@@ -104,5 +104,10 @@
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
+    },
+    "standard-version": {
+        "scripts": {
+            "postchangelog": "arui-scripts changelog"
+        }
     }
 }
