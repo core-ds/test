@@ -38,8 +38,10 @@ jobs:
     steps:
 
       # Переключение на выбранную при запуске action ветку
-      # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
       - uses: actions/checkout@v3
+
+      # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
+      # Извлечение текущей ветки
       - run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
@@ -50,13 +52,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      # Прогон тестов
-      # - name: Install dependencies
-      # run: yarn test
-
       # Сборка приложения в /.publish
       - name: Build app
         run: yarn build
+
+      # Прогон тестов
+      - name: Install dependencies
+        run: yarn test
 
       # Установка npm токена для возможности публикации
       - name: Set NPM Token
@@ -79,7 +81,6 @@ jobs:
       # Создание временных файлов для changelog
       - name: Create changelog temp files
         run: |
-          echo "${{ steps.checkout.outputs }}"
           echo "${{ github.event.inputs.features }}" > changelog_features.tmp
           echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
           echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
