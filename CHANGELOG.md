@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 4.0.0 (2023-12-27)
+
+### Features
+
+-   test ([c6421e3](https://github.com/core-ds/test/commit/c6421e3d297c63aa97a54fb89c76c787784955cc))
+
 ## 3.0.0 (2023-12-27)
 
 ## 2.2.0 (2023-12-27)
@@ -13,3 +19,15 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 Багов changelog
+
+### Features
+
+Очистил changelog файл 2
+
+### Bug Fixes
+
+Багов changelog 2
+
+### ⚠ BREAKING CHANGES
+
+Ломающих изменений changelog 2

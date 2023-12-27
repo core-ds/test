@@ -36,18 +36,23 @@ jobs:
       fail-fast: false
 
     steps:
+
       # Переключение на выбранную при запуске action ветку
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v3
+      # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
+      - uses: actions/checkout@v3
+      - run: |
+          git config user.name ${{ secrets.BOT_USERNAME }}
+          git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
       # Установка зависимостей
       - name: Install dependencies
         run: yarn
 
       # Прогон тестов
-      #- name: Install dependencies
-      #  run: yarn test
+      # - name: Install dependencies
+      # run: yarn test
 
       # Сборка приложения в /.publish
       - name: Build app
@@ -64,13 +69,6 @@ jobs:
         if: github.event.inputs.version == 'beta'
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
-      - name: Set git credentials
-        run: |
-          git config user.name ${{ secrets.BOT_USERNAME }}
-          git config user.email ${{ secrets.BOT_EMAIL }}
-
 
       # Извлечение текущей (актуальной) версии приложения (нужно для построения версии beta)
       - name: Get current version for beta release
@@ -90,3 +88,5 @@ jobs:
         run: npm run lib:release:${{ github.event.inputs.version }}
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch}}
+

@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test-version",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "main": "",
     "scripts": {
         "build": "yarn lib:compile",
@@ -20,7 +20,7 @@
         "lib:release:minor": "yarn lib:compile && yarn standard-version --release-as minor && yarn lib:compile:copy-package-json && yarn lib:pub",
         "lib:release:major": "yarn lib:compile && yarn standard-version --release-as major && yarn lib:compile:copy-package-json && yarn lib:pub",
         "lib:release:beta": "yarn lib:compile && yarn lib:compile:copy-package-json && yarn lib:pub:beta",
-        "lib:pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin main",
+        "lib:pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin \"$BRANCH\"",
         "lib:pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta"
     },
     "dependencies": {},
