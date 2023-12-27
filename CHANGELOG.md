@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.2.1 (2023-12-27)
+
+
+### Features
+
+* edit CHANGELOG.md ([#2](https://github.com/core-ds/test/issues/2)) ([f8ff1fc](https://github.com/core-ds/test/commit/f8ff1fcf860af54ea039bf775c46db694c023ace))
+
 ## 1.2.0 (2023-12-27)
 
 ### 1.1.2 (2023-12-27)
