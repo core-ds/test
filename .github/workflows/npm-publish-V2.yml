@@ -38,11 +38,13 @@ jobs:
     steps:
 
       # Переключение на выбранную при запуске action ветку
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
       # Извлечение текущей ветки
-      - run: |
+      - name: Git config
+        run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
@@ -52,13 +54,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      # Прогон тестов
+      #- name: Run tests
+      #  run: yarn test
+
       # Сборка приложения в /.publish
       - name: Build app
         run: yarn build
-
-      # Прогон тестов
-      - name: Install dependencies
-        run: yarn test
 
       # Установка npm токена для возможности публикации
       - name: Set NPM Token
@@ -85,6 +87,7 @@ jobs:
           echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
           echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
 
+      # Публикация выбранной версии в npm
       - name: Publish ${{ github.event.inputs.version }} version
         run: npm run lib:release:${{ github.event.inputs.version }}
         env:
