@@ -3,19 +3,6 @@ name: Publish to npm
 on:
   workflow_dispatch:
     inputs:
-
-      features:
-        type: text
-        description: changelog features
-
-      bugfixes:
-        type: text
-        description: changelog bugfixes
-
-      breaking-changes:
-        type: text
-        description: changelog breaking changes
-
       version:
         type: choice
         description: Choose which version to release
@@ -27,8 +14,6 @@ on:
 
 jobs:
   build:
-    env:
-      CI: true
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -65,5 +50,4 @@ jobs:
       - name: Publish ${{ github.event.inputs.version }} version
         run: npm run lib:release:${{ github.event.inputs.version }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
