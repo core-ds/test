@@ -102,7 +102,6 @@
         "extends": "./node_modules/arui-presets-lint/commitlint"
     },
     "publishConfig": {
-        "access": "public",
         "registry": "https://registry.npmjs.org"
     },
     "standard-version": {
