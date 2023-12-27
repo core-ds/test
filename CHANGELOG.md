@@ -9,20 +9,3 @@ All notable changes to this project will be documented in this file. See [standa
 
 * fixed ([e989e2b](https://github.com/core-ds/test/commit/e989e2b57488120da405ce951978dd6f177380cb))
 
-## 1.1.0 (2023-12-27)
-
-## 1.0.0 (2023-12-27)
-
-### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
-
-### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
-
-### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
-
-### [0.0.7](https://github.com/core-ds/test/compare/v0.0.6...v0.0.7) (2023-12-26)
-
-### [0.0.5](https://github.com/core-ds/test/compare/v0.0.4...v0.0.5) (2023-12-26)
-
-### [0.0.3](https://github.com/core-ds/test/compare/v0.0.2...v0.0.3) (2023-12-26)
-
-### [0.0.2](https://github.com/core-ds/test/compare/v0.0.1-beta.9d6afce-beta.f07e6a6-beta.3f48851...v0.0.2) (2023-12-26)
