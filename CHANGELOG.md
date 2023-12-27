@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines. Для отработки корректного обновления файла Changelog коммиты нужно создавать согласно [стандарту](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ### 1.2.1 (2023-12-27)
 
