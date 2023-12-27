@@ -3,19 +3,6 @@ name: Publish to npm
 on:
   workflow_dispatch:
     inputs:
-
-      features:
-        type: text
-        description: changelog features
-
-      bugfixes:
-        type: text
-        description: changelog bugfixes
-
-      breaking-changes:
-        type: text
-        description: changelog breaking changes
-
       version:
         type: choice
         description: Choose which version to release
