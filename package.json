@@ -16,6 +16,7 @@
         "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,json}\"",
         "lib:test": "jest --silent --collect-coverage",
         "test": "yarn lib:test",
+        
         "lib:release:patch": "yarn lib:compile && yarn standard-version --release-as patch && yarn lib:compile:copy-package-json && yarn lib:pub",
         "lib:release:minor": "yarn lib:compile && yarn standard-version --release-as minor && yarn lib:compile:copy-package-json && yarn lib:pub",
         "lib:release:major": "yarn lib:compile && yarn standard-version --release-as major && yarn lib:compile:copy-package-json && yarn lib:pub",
