@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 4.1.0 (2023-12-27)
+
 ### 4.0.1 (2023-12-27)
 
 ### Features
@@ -37,3 +39,11 @@ All notable changes to this project will be documented in this file. See [standa
 ### ⚠ BREAKING CHANGES
 
 Ломающих изменений changelog 2
+
+### Features
+
+Что-то там добавил features
+
+### Bug Fixes
+
+Что-то там добавил bugfixes
