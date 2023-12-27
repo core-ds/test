@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test-version",
-    "version": "1.2.1",
+    "version": "2.0.0",
     "main": "",
     "scripts": {
         "build": "yarn lib:compile",
