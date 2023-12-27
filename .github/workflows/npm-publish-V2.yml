@@ -38,6 +38,7 @@ jobs:
     steps:
       # Переключение на выбранную при запуске action ветку
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v3
 
       # Установка зависимостей
@@ -80,6 +81,7 @@ jobs:
       # Создание временных файлов для changelog
       - name: Create changelog temp files
         run: |
+          echo "${{ steps.checkout.outputs }}"
           echo "${{ github.event.inputs.features }}" > changelog_features.tmp
           echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
           echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
