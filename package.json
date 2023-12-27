@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test-version",
-    "version": "4.0.1",
+    "version": "4.0.0",
     "main": "",
     "scripts": {
         "build": "yarn lib:compile",
@@ -100,6 +100,10 @@
     },
     "commitlint": {
         "extends": "./node_modules/arui-presets-lint/commitlint"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
     },
     "standard-version": {
         "scripts": {
