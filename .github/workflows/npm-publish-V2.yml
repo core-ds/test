@@ -36,11 +36,6 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: Set up node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16.9
-
       # Переключение на выбранную при запуске action ветку
       - name: Checkout
         uses: actions/checkout@v3

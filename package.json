@@ -108,6 +108,5 @@
         "scripts": {
             "postchangelog": "arui-scripts changelog"
         }
-    },
-    "packageManager": "yarn@3.1.1"
+    }
 }
