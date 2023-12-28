@@ -88,7 +88,7 @@ jobs:
 
       # Публикация выбранной версии в npm
       - name: Publish ${{ github.event.inputs.version }} version
-        run: yarn run release:${{ github.event.inputs.version }}
+        run: yarn release:${{ github.event.inputs.version }}
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
           BRANCH: ${{ steps.extract_branch.outputs.branch}}
