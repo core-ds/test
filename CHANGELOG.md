@@ -1,6 +1,18 @@
-# Changelog
+## Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+## 6.0.0 (2023-12-28)
+
+### Features
+
+Добавлен новый файл для валидации CHANGELOG.
+
+### Bug Fixes
+
+Фикшу кривое заполнение файла о версиях.
+
+### ⚠ BREAKING CHANGES
+
+Вроде ниче не сломал.
 
 ## 5.0.0 (2023-12-27)
 
