@@ -1,5 +1,5 @@
 {
-  "header": "## Changelog\n\n",
+  "header": "# Changelog\n\n",
   "types": [
     {"type": "feat", "section": "Features"},
     {"type": "fix", "section": "Bug Fixes"},
@@ -17,20 +17,20 @@
   "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
   "issueUrlFormat": "{{host}}/{{owner}}/{{repository}}/issues/{{id}}",
   "userUrlFormat": "{{host}}/{{user}}",
-  "releaseCommitMessageFormat": "{{currentTag}}",
+  "releaseCommitMessageFormat": "{{currentTag}} {{compareUrl}}",
   "releaseNotesFormat": "- {{text}}",
   "changelogFilename": "CHANGELOG.md",
   "commitMessageFormat": "{{type}}({{scope}}): {{subject}}",
   "tagPrefix": "",
   "tagFormat": "{{version}}",
   "initialVersion": "0.1.0",
-  "headerPattern": "^## Changelog$",
-  "releaseCommitMessage": "chore(release): {{currentTag}}",
+  "headerPattern": "^# Changelog$",
+  "releaseCommitMessage": "chore(release): {{currentTag}} {{compareUrl}}",
   "releaseAs": "major",
   "skip": {
     "commit": false,
     "tag": false
   },
-  "format": "## [{{version}}]({{compareUrl}}) ({{date format='YYYY-MM-DD'}})\n\n{{#each commits}}{{#with footer}}{{#if BREAKING CHANGE}}- **{{BREAKING CHANGE}}**\n{{/if}}{{/with}}{{/each}}",
+  "format": "## [{{version}}]({{compareUrl}}) ({{date format='YYYY-DD-MM'}})",
   "test": false
 }
