@@ -16,12 +16,12 @@
         "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,json}\"",
         "lib:test": "jest --silent --collect-coverage",
         "test": "yarn lib:test",
-        "lib:release:patch": "yarn lib:compile && yarn standard-version --release-as patch && yarn lib:compile:copy-package-json && yarn lib:pub",
-        "lib:release:minor": "yarn lib:compile && yarn standard-version --release-as minor && yarn lib:compile:copy-package-json && yarn lib:pub",
-        "lib:release:major": "yarn lib:compile && yarn standard-version --release-as major && yarn lib:compile:copy-package-json && yarn lib:pub",
-        "lib:release:beta": "yarn lib:compile && yarn lib:compile:copy-package-json && yarn lib:pub:beta",
-        "lib:pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin \"$BRANCH\"",
-        "lib:pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta"
+        "release:patch": "yarn compile && yarn standard-version --release-as patch && yarn compile:copy-package-json && yarn pub",
+        "release:minor": "yarn compile && yarn standard-version --release-as minor && yarn compile:copy-package-json && yarn pub",
+        "release:major": "yarn compile && yarn standard-version --release-as major && yarn compile:copy-package-json && yarn pub",
+        "release:beta": "yarn compile && yarn compile:copy-package-json && yarn pub:beta",
+        "pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin \"$BRANCH\"",
+        "pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta"
     },
     "dependencies": {},
     "devDependencies": {
