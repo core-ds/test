@@ -24,7 +24,8 @@
         "release:major": "yarn compile && yarn standard-version --release-as major && yarn compile:copy-package-json && yarn pub",
         "release:beta": "yarn compile && yarn compile:copy-package-json && yarn pub:beta",
         "pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin \"$BRANCH\"",
-        "pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta"
+        "pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta",
+        "test:cmd": "echo \"HELLO WORLD\""
     },
     "dependencies": {},
     "devDependencies": {
@@ -109,7 +110,7 @@
     },
     "standard-version": {
         "scripts": {
-            "postchangelog": "arui-scripts changelog"
+            "postchangelog": "yarn test:cmd"
         }
     }
 }
