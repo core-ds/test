@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.2.0 (2023-12-29)
+
+### ## Features
+
+-   Отрефакторен файл .versionrc ([38faa0a](https://github.com/core-ds/test/commit/38faa0a6ae251a5927c6255d8e55b8d3655fd56a))
+
 ### 9.1.1 (2023-12-29)
 
 ## 9.1.0 (2023-12-29)
@@ -33,3 +39,15 @@
 ### Bug Fixes
 
 Пофикшены баги
+
+### Features
+
+Nen dsfdsf
+
+### Bug Fixes
+
+dfsfgds
+
+### ⚠ BREAKING CHANGES
+
+werwerwer
