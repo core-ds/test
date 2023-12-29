@@ -1,5 +1,7 @@
 # Changelog
 
+## 11.0.0 (2023-12-29)
+
 ## 10.0.0 (2023-12-29)
 
 ## 9.2.0 (2023-12-29)
@@ -57,3 +59,7 @@ werwerwer
 ### Features
 
 Фича changelog retertretretertertert retdfdfv dfdfdg dfgdfgdfg dsfgdfgdgf dfgdfg \n dsfdfsdf
+
+### Bug Fixes
+
+Что-то там добавил bugfixes retrt retert
