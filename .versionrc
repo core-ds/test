@@ -5,9 +5,6 @@
     {"type": "fix", "section": "## Bug Fixes"}
   ],
   "test": false,
-  "host": null,
-  "owner": null,
-  "repository": null,
   "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
   "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
   "issueUrlFormat": "{{host}}/{{owner}}/{{repository}}/issues/{{issue}}",
