@@ -1,5 +1,7 @@
 # Changelog
 
+### 9.1.1 (2023-12-29)
+
 ## 9.1.0 (2023-12-29)
 
 ### ## Features
@@ -55,3 +57,15 @@
 ### ⚠ BREAKING CHANGES
 
 Ломающих изменений changelog
+
+### Features
+
+XXXXXXX
+
+### Bug Fixes
+
+FFFFFFFF
+
+### ⚠ BREAKING CHANGES
+
+RRRRRRRR
