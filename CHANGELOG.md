@@ -33,39 +33,3 @@
 ### Bug Fixes
 
 Пофикшены баги
-
-### Features
-
-Очистил changelog файл 2
-
-### Bug Fixes
-
-Фикшу кривое заполнение файла о версиях.
-
-### ⚠ BREAKING CHANGES
-
-Ломающих изменений changelog 2
-
-### Features
-
-Фича changelog
-
-### Bug Fixes
-
-Пофикшены баги
-
-### ⚠ BREAKING CHANGES
-
-Ломающих изменений changelog
-
-### Features
-
-XXXXXXX
-
-### Bug Fixes
-
-FFFFFFFF
-
-### ⚠ BREAKING CHANGES
-
-RRRRRRRR
