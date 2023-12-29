@@ -21,6 +21,7 @@
   "initialVersion": "0.1.0",
   "headerPattern": "^# Changelog$",
   "releaseCommitMessage": "chore(release): {{currentTag}}",
+  "compareUrl": "{{@root.host}}/{{@root.owner}}/{{@root.repository}}/compare/{{previousTag}}...{{currentTag}}",
   "releaseAs": "major",
   "skip": {
     "commit": false,
