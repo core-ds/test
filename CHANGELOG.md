@@ -1,5 +1,7 @@
 # Changelog
 
+## 10.0.0 (2023-12-29)
+
 ## 9.2.0 (2023-12-29)
 
 ### ## Features
@@ -51,3 +53,7 @@ dfsfgds
 ### ⚠ BREAKING CHANGES
 
 werwerwer
+
+### Features
+
+Фича changelog retertretretertertert retdfdfv dfdfdg dfgdfgdfg dsfgdfgdgf dfgdfg \n dsfdfsdf
