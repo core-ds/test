@@ -3,6 +3,10 @@
     "name": "@alfalab/bridge-to-am-test-version",
     "version": "9.1.1",
     "main": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/core-ds/test.git"
+    },
     "scripts": {
         "build": "yarn compile",
         "compile": "yarn compile:clean && yarn compile:ts && yarn compile:copy-resources",
