@@ -4,11 +4,15 @@
     {"type": "feat", "section": "## Features"},
     {"type": "fix", "section": "## Bug Fixes"}
   ],
+  "test": false,
+  "host": "https://github.com",
+  "owner": "core-ds",
+  "repository": "test"
   "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
   "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
   "issueUrlFormat": "{{host}}/{{owner}}/{{repository}}/issues/{{id}}",
   "userUrlFormat": "{{host}}/{{user}}",
-  "releaseCommitMessageFormat": "{{currentTag}}",
+  "releaseCommitMessageFormat": "chore(release): {{currentTag}}",
   "releaseNotesFormat": "- {{text}}",
   "changelogFilename": "CHANGELOG.md",
   "commitMessageFormat": "{{type}}({{scope}}): {{subject}}",
@@ -22,9 +26,5 @@
     "commit": false,
     "tag": false
   },
-  "format": "## [{{version}}]({{compareUrl}}) ({{date format='YYYY-MM-DD'}})\n\n{{#each commits}}{{#with footer}}{{#if BREAKING CHANGE}}- **{{BREAKING CHANGE}}**\n{{/if}}{{/with}}{{/each}}",
-  "test": false,
-  "host": "https://github.com",
-  "owner": "owner",
-  "repository": "repository"
+  "format": "## [{{version}}]({{compareUrl}}) ({{date format='YYYY-MM-DD'}})",
 }
