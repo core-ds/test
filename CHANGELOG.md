@@ -11,11 +11,14 @@
 
 ## 15.1.0 (11-01-2024)
 
-### FeaturesФича changelog.
+### Features
+- Фича changelog.
 - Что-то еще.
-### Bug FixesБагов changelog.
+### Bug Fixes
+- Багов changelog.
 - Что-то еще.
-### BREAKING CHANGESЛомающих изменений changelog.
+### BREAKING CHANGES
+- Ломающих изменений changelog.
 - Что-то еще.
 
 # 15.0.0 (11-01-2024)
