@@ -73,12 +73,6 @@ jobs:
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Извлечение текущей (актуальной) версии приложения (нужно для построения версии beta)
-      - name: Get current version for beta release
-        if: github.event.inputs.version == 'beta'
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
-
       # Создание временных файлов для changelog
       - name: Create changelog temp files
         run: |
@@ -92,4 +86,16 @@ jobs:
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
           BRANCH: ${{ steps.extract_branch.outputs.branch}}
+
+      # Извлечение текущей (актуальной) версии приложения
+      - name: Get current version for release
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Push changes to ${{ steps.extract_branch.outputs.branch}}
+        if: github.event.inputs.version != 'beta'
+        run: yarn pub
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch}}
+          VERSION: ${{ steps.package-version.outputs.current-version }}
 
