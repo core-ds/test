@@ -36,12 +36,12 @@ jobs:
       fail-fast: false
 
     steps:
-      # Переключение на выбранную при запуске action ветку
+      # Переключение на выбранную при запуске action ветку.
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Установка учетных данных бота как gitUser в текущем окружении (для release commit от имени бота)
-      # Извлечение текущей ветки
+      # Установка учётных данных bot как gitUser в текущем окружении (для release commit).
+      # Извлечение текущей ветки.
       - name: Git config
         run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
@@ -49,7 +49,7 @@ jobs:
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      # Установка зависимостей
+      # Установка зависимостей.
       - name: Install dependencies
         run: yarn
 
@@ -57,45 +57,52 @@ jobs:
       #- name: Run tests
       #  run: yarn test
 
-      # Сборка приложения в /.publish
+      # Сборка приложения в /.publish.
       - name: Build app
         run: yarn build
 
-      # Установка npm токена для возможности публикации
+      # Установка npm токена для возможности публикации.
       - name: Set NPM Token
         uses: filipstefansson/set-npm-token-action@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
-      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta)
+      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
       - name: Set last commit sha for beta release
         if: github.event.inputs.version == 'beta'
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Создание временных файлов для changelog
+      # Создание временных файлов для changelog.
       - name: Create changelog temp files
         run: |
           echo "${{ github.event.inputs.features }}" > changelog_features.tmp
           echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
           echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
 
-      # Публикация выбранной версии в npm
+      # Извлечение текущей (актуальной) версии приложения для выпуска beta пакета.
+      - name: Get current version for release
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
         run: yarn release:${{ github.event.inputs.version }}
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
           BRANCH: ${{ steps.extract_branch.outputs.branch}}
 
-      # Извлечение текущей (актуальной) версии приложения
+      # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
       - name: Get current version for release
-        id: package-version
+        if: github.event.inputs.version != 'beta'
+        id: package-version-for-release
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: Push changes to ${{ steps.extract_branch.outputs.branch}}
+      # Заполнение файла changelog и выполнение release commit в выбранную release ветку.
+      - name: Push changes to ${{ steps.extract_branch.outputs.branch}} branch
         if: github.event.inputs.version != 'beta'
-        run: yarn pub
+        run: yarn create-release-commit
         env:
           BRANCH: ${{ steps.extract_branch.outputs.branch}}
-          VERSION: ${{ steps.package-version.outputs.current-version }}
+          VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
 
