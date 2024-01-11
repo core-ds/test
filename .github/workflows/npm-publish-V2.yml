@@ -36,12 +36,12 @@ jobs:
       fail-fast: false
 
     steps:
-      # Переключение на выбранную при запуске action ветку.
+      # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
       - name: Checkout
         uses: actions/checkout@v3
 
       # Установка учётных данных bot как gitUser в текущем окружении (для release commit).
-      # Извлечение текущей ветки.
+      # Извлечение имени текущей ветки.
       - name: Git config
         run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
@@ -80,8 +80,9 @@ jobs:
           echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
           echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
 
-      # Извлечение текущей (актуальной) версии приложения для выпуска beta пакета.
-      - name: Get current version for release
+      # Извлечение текущей версии приложения для выпуска beta пакета.
+      - name: Get current version for beta
+        if: github.event.inputs.version == 'beta'
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
@@ -98,8 +99,8 @@ jobs:
         id: package-version-for-release
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      # Заполнение файла changelog и выполнение release commit в выбранную release ветку.
-      - name: Push changes to ${{ steps.extract_branch.outputs.branch}} branch
+      # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
+      - name: Push changes to ${{ steps.extract_branch.outputs.branch}} branch about release
         if: github.event.inputs.version != 'beta'
         run: yarn create-release-commit
         env:
