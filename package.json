@@ -19,13 +19,13 @@
         "lint:fix": "yarn lint:scripts --fix",
         "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,json}\"",
         "test": "jest --silent --collect-coverage",
-        "release:patch": "yarn compile && yarn standard-version --release-as patch && yarn compile:copy-package-json && yarn pub",
-        "release:minor": "yarn compile && yarn standard-version --release-as minor && yarn compile:copy-package-json && yarn pub",
-        "release:major": "yarn compile && yarn standard-version --release-as major && yarn compile:copy-package-json && yarn pub",
+        "release:patch": "yarn compile && npm version patch --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
+        "release:minor": "yarn compile && npm version minor --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
+        "release:major": "yarn compile && npm version major --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
         "release:beta": "yarn compile && yarn compile:copy-package-json && yarn pub:beta",
         "pub": "npm publish .publish --userconfig \"../.npmrc\" && git push --follow-tags origin \"$BRANCH\"",
         "pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --userconfig \"../.npmrc\" --tag beta",
-        "test:cmd": "echo \"HELLO WORLD\""
+        "test:cmd": "FEATURES_ENV='/Вынес доработки./Купил слона./Вылечил обезьяну.' BREAKING_ENV='/Вынес доработки багов./Купил слона для багов./Вылечил обезьяну с багами.' BUGFIX_ENV='/Вынес ломающие доработки./Купил ломающего слона./Вылечил ломающуюся обезьяну.' bash ./bin/prettyfy-changelog-beta.sh"
     },
     "dependencies": {},
     "devDependencies": {
@@ -55,7 +55,6 @@
         "lint-staged": "^12.5.0",
         "prettier": "^2.7.1",
         "promisify-child-process": "4.1.1",
-        "standard-version": "9.0.0",
         "stylelint": "^14.9.1",
         "stylelint-config-prettier": "^9.0.3",
         "ts-jest": "25.3.1",
@@ -107,10 +106,5 @@
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
-    },
-    "standard-version": {
-        "scripts": {
-            "postchangelog": "yarn test:cmd"
-        }
     }
 }
