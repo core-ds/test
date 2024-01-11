@@ -8,16 +8,19 @@ on:
       features:
         type: text
         description: changelog features
+        default: ''
 
       # Input для ввода bugfixes changes (для CHANGELOG.md)
       bugfixes:
         type: text
         description: changelog bugfixes
+        default: ''
 
       # Input для ввода breaking changes (для CHANGELOG.md)
       breaking-changes:
         type: text
         description: changelog breaking changes
+        default: ''
 
       # Select для выбора версии
       version:
@@ -102,8 +105,13 @@ jobs:
       # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
       - name: Push changes to ${{ steps.extract_branch.outputs.branch}} branch about release
         if: github.event.inputs.version != 'beta'
-        run: yarn create-release-commit
+        run: |
+          yarn changelog
+          yarn create-release-commit
         env:
           BRANCH: ${{ steps.extract_branch.outputs.branch}}
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
-
+          SEMANTIC_VERSION: ${{ github.event.inputs.version }}
+          FEATURES: ${{ github.event.inputs.features }}
+          BUGFIXES: ${{ github.event.inputs.bugfixes }}
+          BREAKING_CHANGES: ${{ github.event.inputs.breaking-changes }}
