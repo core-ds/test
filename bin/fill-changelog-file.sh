@@ -17,7 +17,7 @@ function generateTitle {
 
   gmt_time=$(TZ="GMT+3" date +%d-%m-%Y);
 
-  echo "$caption $VERSION $gmt_time"
+  echo "$caption $VERSION ($gmt_time)"
 };
 
 # Возвращает строку в markdown разметке о Features, Bug Fixes, BREAKING CHANGES (если что-то из этого отсутствует, то в не попадет на выход)
