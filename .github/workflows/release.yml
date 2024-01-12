@@ -46,10 +46,14 @@ jobs:
 
       # Установка учётных данных bot как gitUser в текущем окружении (для release commit).
       # Извлечение имени текущей ветки.
+      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
       - name: Git config
         run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        id: branch
 
       # Установка зависимостей.
       - name: Install dependencies
@@ -69,12 +73,6 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
-      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
-      - name: Set last commit sha for beta release
-        if: github.event.inputs.version == 'beta'
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
       # Извлечение текущей версии приложения для выпуска beta пакета.
       - name: Get current version for beta
         if: github.event.inputs.version == 'beta'
@@ -85,7 +83,7 @@ jobs:
       - name: Publish ${{ github.event.inputs.version }} version
         run: yarn release:${{ github.event.inputs.version }}
         env:
-          BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
+          BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}
           BRANCH: $(basename $GITHUB_REF)
 
       # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
@@ -95,7 +93,7 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
-      - name: Push changes to ${{ steps.extract_branch.outputs.branch}} branch about release
+      - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
         if: github.event.inputs.version != 'beta'
         run: |
           yarn changelog
@@ -103,8 +101,8 @@ jobs:
         env:
           BRANCH: $(basename $GITHUB_REF)
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
-          LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.vars.outputs.sha_short }}
-          SHA_SHORT: ${{ steps.vars.outputs.sha_short }}
+          LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
+          SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
           FEATURES: ${{ github.event.inputs.features }}
           BUGFIXES: ${{ github.event.inputs.bugfixes }}
