@@ -43,7 +43,7 @@ function generateChangelogInfo {
 # останавливает выполнение всего скрипта и выбрасывает ошибку об этом
 function checkAvailabilityInformationForChangelog {
   if [[ ${#FEATURES} -eq 0 && ${#BUGFIXES} -eq 0 && ${#BREAKING_CHANGES} -eq 0  ]]
-    then echo "Не указана информация об изменениях для заполнения $changelog_file файла." >&2
+    then echo "Не указана информация об изменениях для заполнения $changelog_file файла."
   fi
 }
 
