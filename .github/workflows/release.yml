@@ -84,7 +84,7 @@ jobs:
         run: yarn release:${{ github.event.inputs.version }}
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}
-          BRANCH: $(basename $GITHUB_REF)
+          BRANCH: ${{ steps.branch.outputs.branch }}
 
       # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
       - name: Get current version for release
@@ -99,7 +99,7 @@ jobs:
           yarn changelog
           yarn create-release-commit
         env:
-          BRANCH: $(basename $GITHUB_REF)
+          BRANCH: ${{ steps.branch.outputs.branch }}
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
