@@ -73,7 +73,7 @@ jobs:
 
       - name: Get repository URL
         run: |
-          echo "Repository URL: https://github.com/${{ env.GITHUB_REPOSITORY }}"
+          echo "Repository URL: https://github.com/${{ github.repository }}"
 
       - name: TEST CHECK
         run: |
