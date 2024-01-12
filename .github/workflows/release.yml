@@ -103,6 +103,7 @@ jobs:
         env:
           BRANCH: $(basename $GITHUB_REF)
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
+          LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.vars.outputs.sha_short }}
           SHA_SHORT: ${{ steps.vars.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
           FEATURES: ${{ github.event.inputs.features }}

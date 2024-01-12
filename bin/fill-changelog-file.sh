@@ -5,7 +5,7 @@ new_line="
 separator="
 - ";
 
-# Генерирует title для записи в changelog в формате: # 2.2.8 (01.01.2024)
+# Генерирует title для записи в changelog в формате: # 2.2.8 (24ewe456) (01.01.2024)
 function generateTitle {
   if [[ $SEMANTIC_VERSION == "patch" ]]
     then caption="###"
@@ -17,7 +17,7 @@ function generateTitle {
 
   gmt_time=$(TZ="GMT+3" date +%d-%m-%Y);
 
-  echo "$caption $VERSION ($gmt_time)"
+  echo "$caption $VERSION ([$SHA_SHORT]($LAST_COMMIT_URL)) ($gmt_time)"
 };
 
 # Возвращает строку в markdown разметке о Features, Bug Fixes, BREAKING CHANGES (если что-то из этого отсутствует, то в не попадет на выход)
