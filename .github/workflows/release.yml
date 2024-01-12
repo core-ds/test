@@ -77,9 +77,12 @@ jobs:
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
-        run: yarn release:${{ github.event.inputs.version }}
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          BETA_VERSION="${{ steps.package-version.outputs.current-version }}-beta.${COMMIT_HASH}"
+          yarn release:${{ github.event.inputs.version }}
         env:
-          BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.$(git rev-parse --short HEAD)
+          #BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.$(git rev-parse --short HEAD)
           BRANCH: $(basename $GITHUB_REF)
 
       # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
