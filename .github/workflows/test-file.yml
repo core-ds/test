@@ -74,7 +74,7 @@ jobs:
       - name: TEST CHECK
         run: |
           echo "custom-sha: ${{ steps.vars.outputs.sha_short }}"
-          echo "GITHUB_SHA-from package-version: ${{ steps.package-version.outputs.GITHUB_SHA }}"
-          echo "GITHUB_WORKFLOW_SHA-from package-version: ${{ steps.package-version.outputs.GITHUB_WORKFLOW_SHA }}"
-          echo "GITHUB_ACTION_REPOSITORY-from package-version: ${{ steps.package-version.outputs.GITHUB_ACTION_REPOSITORY }}"
-          echo "GITHUB_HEAD_REF-from package-version: ${{ steps.package-version.outputs.GITHUB_HEAD_REF }}"
+          echo "GITHUB_SHA-from package-version: ${{ github.sha }}"
+          echo "GITHUB_WORKFLOW_SHA-from package-version: ${{ github.workflow_sha }}"
+          echo "GITHUB_ACTION_REPOSITORY-from package-version: ${{ github.action_repository }}"
+          echo "GITHUB_HEAD_REF-from package-version: ${{ github.head_ref }}"
