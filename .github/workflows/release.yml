@@ -69,6 +69,12 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
+      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
+      - name: Set last commit sha for beta release
+        if: github.event.inputs.version == 'beta'
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       # Извлечение текущей версии приложения для выпуска beta пакета.
       - name: Get current version for beta
         if: github.event.inputs.version == 'beta'
@@ -77,14 +83,10 @@ jobs:
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
-        run: |
-          BETA_VERSION="$CURRENT_VERSION-beta.$COMMIT_HASH"
-          yarn release:${{ github.event.inputs.version }}
+        run: yarn release:${{ github.event.inputs.version }}
         env:
-          #BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.$(git rev-parse --short HEAD)
+          BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.vars.outputs.sha_short }}
           BRANCH: $(basename $GITHUB_REF)
-          SHOT_COMMIT_SHA: $(git rev-parse --short HEAD)
-          CURRENT_VERSION: ${{ steps.package-version.outputs.current-version }}
 
       # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
       - name: Get current version for release
@@ -101,6 +103,7 @@ jobs:
         env:
           BRANCH: $(basename $GITHUB_REF)
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
+          SHA_SHORT: ${{ steps.vars.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
           FEATURES: ${{ github.event.inputs.features }}
           BUGFIXES: ${{ github.event.inputs.bugfixes }}

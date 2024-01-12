@@ -71,6 +71,10 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
+      - name: Get repository URL
+        run: |
+          echo "Repository URL: https://github.com/${{ env.GITHUB_REPOSITORY }}"
+
       - name: TEST CHECK
         run: |
           echo "custom-sha: ${{ steps.vars.outputs.sha_short }}"
