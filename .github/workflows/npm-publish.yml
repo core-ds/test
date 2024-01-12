@@ -1,11 +1,32 @@
-name: Publish to npm
+name: Publish to npm V2
 
 on:
   workflow_dispatch:
     inputs:
+
+      # Input для ввода features changes (для CHANGELOG.md)
+      features:
+        type: text
+        description: changelog features
+        default: ''
+
+      # Input для ввода bugfixes changes (для CHANGELOG.md)
+      bugfixes:
+        type: text
+        description: changelog bugfixes
+        default: ''
+
+      # Input для ввода breaking changes (для CHANGELOG.md)
+      breaking-changes:
+        type: text
+        description: changelog breaking changes
+        default: ''
+
+      # Select для выбора версии
       version:
         type: choice
         description: Choose which version to release
+        required: true
         options:
           - beta
           - patch
@@ -19,35 +40,40 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v3
+      # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: yarn
+      # Установка учётных данных bot как gitUser в текущем окружении (для release commit).
+      # Извлечение имени текущей ветки.
+      - name: Git config
+        run: |
+          git config user.name ${{ secrets.BOT_USERNAME }}
+          git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
-      - name: Build app
-        run: yarn build
-
+      # Установка npm токена для возможности публикации.
       - name: Set NPM Token
         uses: filipstefansson/set-npm-token-action@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
+      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
       - name: Set last commit sha for beta release
         if: github.event.inputs.version == 'beta'
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Set git credentials
-        run: |
-          git config user.name ${{ secrets.BOT_USERNAME }}
-          git config user.email ${{ secrets.BOT_EMAIL }}
-
-      - name: Get current version for beta release
+      # Извлечение текущей версии приложения для выпуска beta пакета.
+      - name: Get current version for beta
         if: github.event.inputs.version == 'beta'
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: Publish ${{ github.event.inputs.version }} version
-        run: npm run lib:release:${{ github.event.inputs.version }}
-        env:
-          BETA_VERSION: ${{ steps.package-version.outputs.current-version}}-beta.${{ steps.vars.outputs.sha_short }}
+      - name: TEST CHECK
+        run: |
+          git config user.name ${{ secrets.BOT_USERNAME }}
+          git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch

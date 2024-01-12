@@ -26,6 +26,7 @@ on:
       version:
         type: choice
         description: Choose which version to release
+        required: true
         options:
           - beta
           - patch
@@ -75,13 +76,6 @@ jobs:
         if: github.event.inputs.version == 'beta'
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      # Создание временных файлов для changelog.
-      - name: Create changelog temp files
-        run: |
-          echo "${{ github.event.inputs.features }}" > changelog_features.tmp
-          echo "${{ github.event.inputs.bugfixes }}" > changelog_bugfixes.tmp
-          echo "${{ github.event.inputs.breaking-changes }}" > changelog_breaking_changes.tmp
 
       # Извлечение текущей версии приложения для выпуска beta пакета.
       - name: Get current version for beta
