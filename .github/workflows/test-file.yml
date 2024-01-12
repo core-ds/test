@@ -76,6 +76,7 @@ jobs:
           echo "custom-sha: ${{ steps.vars.outputs.sha_short }}"
           echo "GITHUB_SHA: ${{ github.sha }}"
           echo "GITHUB_REF: ${{ github.ref }}"
+          echo "Ветка: ${{ GITHUB_REF#refs/heads/ }}"
           echo "GITHUB_WORKFLOW_SHA: ${{ github.workflow_sha }}"
           echo "GITHUB_ACTION_REPOSITORY: ${{ github.action_repository }}"
           echo "GITHUB_HEAD_REF: ${{ github.head_ref }}"
