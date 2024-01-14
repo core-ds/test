@@ -1,3 +1,10 @@
+## 16.5.0 ([56a8c18](https://github.com/core-ds/test/commit/56a8c18)) (14-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 ### 16.4.1 ([a3c8378](https://github.com/core-ds/test/commit/a3c8378)) (14-01-2024)
 
 
