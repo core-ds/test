@@ -81,7 +81,9 @@ jobs:
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
-        run: yarn release:${{ github.event.inputs.version }}
+        run: |
+          yarn release:${{ github.event.inputs.version }}
+          echo "### Выпущена новая версия библиотеки: $BETA_VERSION" >> $GITHUB_STEP_SUMMARY
         env:
           BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}
           BRANCH: ${{ steps.branch.outputs.branch }}
@@ -98,6 +100,7 @@ jobs:
         run: |
           yarn changelog
           yarn create-release-commit
+          echo "### Выпущена новая версия библиотеки: $VERSION" >> $GITHUB_STEP_SUMMARY
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
@@ -107,8 +110,3 @@ jobs:
           FEATURES: ${{ github.event.inputs.features }}
           BUGFIXES: ${{ github.event.inputs.bugfixes }}
           BREAKING_CHANGES: ${{ github.event.inputs.breaking-changes }}
-
-      # Сбор финальной информации
-      - name: Summary
-        run: |
-          echo "### Выпущена новая версия библиотеки: ${{ steps.package-version-for-release.outputs.current-version }}" >> $GITHUB_STEP_SUMMARY
