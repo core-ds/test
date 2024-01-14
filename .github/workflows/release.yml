@@ -98,6 +98,7 @@ jobs:
         run: |
           yarn changelog
           yarn create-release-commit
+          echo "### Выпущена новая версия библиотеки: ${{ steps.package-version-for-release.outputs.current-version }}" >> SGITHUB_STEP_SUMMARY
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
