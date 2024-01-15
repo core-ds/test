@@ -56,3 +56,5 @@ $Changelog
 "
 
 echo "$fullChangelogInfo" | cat - "$changelog_file" > temp && mv temp "$changelog_file"
+
+echo "$Changelog" >> "$GITHUB_STEP_SUMMARY"
