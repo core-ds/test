@@ -1,3 +1,14 @@
+# 18.0.0 ([b7c84d8](https://github.com/core-ds/test/commit/b7c84d8)) (14-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### Bug Fixes
+- Тестовый выпуск баги фикс инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 ### 16.5.1 ([0dd6244](https://github.com/core-ds/test/commit/0dd6244)) (14-01-2024)
 
 
