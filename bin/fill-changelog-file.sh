@@ -39,10 +39,11 @@ function generateChangelogInfo {
   echo "$ChangelogInfo$new_line"
 };
 
-# Проверяет передана ли информация о Features, Bug Fixes, BREAKING CHANGES, если нет то пишет об этом
+# Проверяет передана ли информация о Features, Bug Fixes, BREAKING CHANGES, если нет то пишет об этом в summary
 function checkAvailabilityInformationForChangelog {
   if [[ ${#FEATURES} -eq 0 && ${#BUGFIXES} -eq 0 && ${#BREAKING_CHANGES} -eq 0  ]]
-    then echo "Не указана информация об изменениях для заполнения $changelog_file файла."
+    then echo "Не указана информация об изменениях для заполнения $changelog_file файла." >> "$GITHUB_STEP_SUMMARY"
+  else echo "$Changelog" >> "$GITHUB_STEP_SUMMARY"
   fi
 }
 
@@ -57,4 +58,6 @@ $Changelog
 
 echo "$fullChangelogInfo" | cat - "$changelog_file" > temp && mv temp "$changelog_file"
 
-echo "$Changelog" >> "$GITHUB_STEP_SUMMARY"
+echo "# Выпущена новая версия библиотеки: $VERSION" >> "$GITHUB_STEP_SUMMARY"
+
+checkAvailabilityInformationForChangelog
