@@ -57,7 +57,7 @@ jobs:
 
       # Установка зависимостей.
       - name: Install dependencies
-        run: yarn install --silent
+        run: yarn install
 
       # Сборка приложения в /.publish.
       - name: Build app
@@ -104,8 +104,8 @@ jobs:
           yarn create-release-commit
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
-          MESSAGE: Релиз версии ${{ steps.package-version-for-release.outputs.current-version }}
-          VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
+          MESSAGE: Релиз версии ${{ steps.package-version.outputs.current-version }}
+          VERSION: ${{ steps.package-version.outputs.current-version }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
