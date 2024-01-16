@@ -1,3 +1,14 @@
+## 21.0.0 ([29cc60c](https://github.com/core-ds/test/commit/29cc60c)) (16-01-2024)
+
+### Bug Fixes
+- Тестовый выпуск баги фикс инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### BREAKING CHANGES
+- Тестовый выпуск ломающие правки инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 # 21.0.0 ([be70399](https://github.com/core-ds/test/commit/be70399)) (16-01-2024)
 
 ### Features
