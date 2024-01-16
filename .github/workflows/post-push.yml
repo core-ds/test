@@ -1,0 +1,26 @@
+name: Post push check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Установка зависимостей.
+      - name: Install dependencies
+        run: yarn
+
+      # Прогон тестов
+      - name: Run tests
+        run: yarn test
