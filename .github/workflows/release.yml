@@ -81,7 +81,7 @@ jobs:
             then
               echo "beta" >> "$TAG"
               echo "${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}" >> "$VERSION"
-          else caption="###"
+          else
             echo "latest" >> "$TAG"
             echo "${{ github.event.inputs.version }}" >> "$VERSION"
           fi
