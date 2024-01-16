@@ -19,14 +19,10 @@
         "lint:fix": "yarn lint:scripts --fix",
         "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,css,json}\"",
         "test": "jest --silent --collect-coverage",
-        "release:patch": "yarn compile && npm version patch --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
-        "release:minor": "yarn compile && npm version minor --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
-        "release:major": "yarn compile && npm version major --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
-        "release:beta": "yarn compile && npm version \"$BETA_VERSION\" --no-git-tag-version && yarn compile:copy-package-json && yarn pub:beta",
+        "release": "yarn compile && npm version \"$VERSION\" --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
         "create-release-commit": "git add package.json CHANGELOG.md && git commit -m \"Выпуск версии $VERSION\" && git push origin \"$BRANCH\"",
         "changelog": "bash bin/fill-changelog-file.sh",
-        "pub": "npm publish .publish --userconfig \"../.npmrc\" --tag minor",
-        "pub:beta": "npm publish .publish --userconfig \"../.npmrc\" --tag beta"
+        "pub": "npm publish .publish --userconfig \"../.npmrc\" --tag \"$TAG\""
     },
     "dependencies": {},
     "devDependencies": {

@@ -59,10 +59,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      # Прогон тестов
-      #- name: Run tests
-      #  run: yarn test
-
       # Сборка приложения в /.publish.
       - name: Build app
         run: yarn build
@@ -82,14 +78,19 @@ jobs:
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
         run: |
-          yarn release:$SELECTED_VERSION
+          if [[ $SELECTED_VERSION == "beta" ]]
+            then
+              TAG="beta"
+              VERSION="${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}"
+          fi
+          yarn release
           if [[ $SELECTED_VERSION == "beta" ]]
             then echo "### Выпущена новая версия библиотеки: $BETA_VERSION" >> $GITHUB_STEP_SUMMARY
           fi
         env:
-          BETA_VERSION: ${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}
           BRANCH: ${{ steps.branch.outputs.branch }}
-          SELECTED_VERSION: ${{ github.event.inputs.version }}
+          VERSION: ${{ github.event.inputs.version }}
+          TAG: 'latest'
 
       # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
       - name: Get current version for release
