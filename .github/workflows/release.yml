@@ -84,7 +84,7 @@ jobs:
           if [[ $SELECTED_VERSION == "beta" ]]
             then
               export TAG="beta"
-              export VERSION=""${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}""
+              export VERSION=""${{ steps.package-version.outputs.current-version }}-beta-${{ steps.branch.outputs.sha_short }}""
           fi
 
           yarn release
