@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Release
 
 on:
   workflow_dispatch:
@@ -53,6 +53,7 @@ jobs:
           git config user.email ${{ secrets.BOT_EMAIL }}
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          export SASHA="PASHKEVICH AV"
         id: branch
 
       # Установка зависимостей.
@@ -77,17 +78,15 @@ jobs:
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
         run: |
+          echo "$SASHA"
+          export TAG="latest"
+          export VERSION="$SELECTED_VERSION"
+
           if [[ $SELECTED_VERSION == "beta" ]]
             then
               export TAG="beta"
               export VERSION=""${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}""
-          else
-              TAG="latest"
-              VERSION="${{ github.event.inputs.version }}"
           fi
-
-          echo "$TAG"
-          echo "$VERSION"
 
           yarn release
 
@@ -107,6 +106,7 @@ jobs:
           yarn create-release-commit
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
+          MESSAGE: Релиз версии ${{ steps.package-version-for-release.outputs.current-version }}
           VERSION: ${{ steps.package-version-for-release.outputs.current-version }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
