@@ -1,4 +1,4 @@
-# 19.0.0 ([38a5d85](https://github.com/core-ds/test/commit/38a5d85)) (14-01-2024)
+# 19.0.1 ([38a5d85](https://github.com/core-ds/test/commit/38a5d85)) (14-01-2024)
 
 ### Features
 - Тестовый выпуск features инфа.
