@@ -79,11 +79,11 @@ jobs:
         run: |
           if [[ $SELECTED_VERSION == "beta" ]]
             then
-              echo "beta" >> $TAG
-              echo "${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}" >> $VERSION
+              TAG="beta"
+              VERSION=""${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}""
           else
-            echo "latest" >> $TAG
-            echo "${{ github.event.inputs.version }}" >> $VERSION
+              TAG="latest"
+              VERSION="${{ github.event.inputs.version }}"
           fi
 
           echo "$TAG"
