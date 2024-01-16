@@ -57,7 +57,7 @@ jobs:
 
       # Установка зависимостей.
       - name: Install dependencies
-        run: yarn
+        run: yarn install --silent
 
       # Сборка приложения в /.publish.
       - name: Build app
