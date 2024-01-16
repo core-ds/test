@@ -68,10 +68,10 @@ jobs:
         run: yarn build
 
       # Установка npm токена для возможности публикации.
-      #- name: Set NPM Token
-      #  uses: filipstefansson/set-npm-token-action@v1
-      #  with:
-      #    token: ${{ secrets.NPM_TOKEN }}
+      - name: Set NPM Token
+        uses: filipstefansson/set-npm-token-action@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
 
       # Извлечение текущей версии приложения для выпуска beta пакета.
       - name: Get current version for beta
