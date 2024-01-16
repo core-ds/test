@@ -70,8 +70,7 @@ jobs:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       # Извлечение текущей версии приложения для выпуска beta пакета.
-      - name: Get current version for beta
-        if: github.event.inputs.version == 'beta'
+      - name: Extract current version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
@@ -83,20 +82,16 @@ jobs:
               TAG="beta"
               VERSION="${{ steps.package-version.outputs.current-version }}-beta.${{ steps.branch.outputs.sha_short }}"
           fi
+          echo "$TAG"
+          echo "$VERSION"
           yarn release
           if [[ $SELECTED_VERSION == "beta" ]]
-            then echo "### Выпущена новая версия библиотеки: $BETA_VERSION" >> $GITHUB_STEP_SUMMARY
+            then echo "### Выпущена новая версия библиотеки: $VERSION" >> $GITHUB_STEP_SUMMARY
           fi
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           VERSION: ${{ github.event.inputs.version }}
           TAG: 'latest'
-
-      # Извлечение текущей (актуальной) версии приложения для выпуска patch|minor|major пакета.
-      - name: Get current version for release
-        if: github.event.inputs.version != 'beta'
-        id: package-version-for-release
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
       - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
