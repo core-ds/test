@@ -22,11 +22,11 @@
         "release:patch": "yarn compile && npm version patch --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
         "release:minor": "yarn compile && npm version minor --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
         "release:major": "yarn compile && npm version major --no-git-tag-version && yarn compile:copy-package-json && yarn pub",
-        "release:beta": "yarn compile && yarn compile:copy-package-json && yarn pub:beta",
+        "release:beta": "yarn compile && npm version \"$BETA_VERSION\" --no-git-tag-version && yarn compile:copy-package-json && yarn pub:beta",
         "create-release-commit": "git add package.json CHANGELOG.md && git commit -m \"Выпуск версии $VERSION\" && git push origin \"$BRANCH\"",
         "changelog": "bash bin/fill-changelog-file.sh",
-        "pub": "npm publish .publish",
-        "pub:beta": "cd .publish && npm version \"$BETA_VERSION\" --no-git-tag-version && npm publish --tag beta"
+        "pub": "npm publish .publish --userconfig \"../.npmrc\" --tag minor",
+        "pub:beta": "npm publish .publish --userconfig \"../.npmrc\" --tag beta"
     },
     "dependencies": {},
     "devDependencies": {
