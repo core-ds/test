@@ -1,3 +1,10 @@
+# 23.0.0 ([f2cbb95](https://github.com/core-ds/test/commit/f2cbb95)) (17-01-2024)
+
+### Features
+- Вынес registry в github action file
+### Bug Fixes
+- Фикс линтовой ошибки на registry 
+
 # 22.0.0 ([e7d1e45](https://github.com/core-ds/test/commit/e7d1e45)) (16-01-2024)
 
 ### Features
