@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: Check permissions
         run: |
-          white_list=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
+          white_list=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull6")
 
           if [[ "${white_list[@]}" =~ "${ACTOR}" ]]
             then echo "Доступ разрешен."
