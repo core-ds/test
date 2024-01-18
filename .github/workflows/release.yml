@@ -42,14 +42,15 @@ jobs:
     steps:
       - name: Check permissions
         run: |
-          users_array=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
+          white_list=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
 
-          if [[ "${users_array[@]}" =~ "${ACTOR}" ]] && [[ "${SELECTED_VERSION}" != "beta" ]]
-          then
-            echo "Доступ разрешен"
+          if [[ "${white_list[@]}" =~ "${ACTOR}" ]]
+            then echo "Доступ разрешен."
+          elif [[ "${action}" == "beta" ]]
+            then echo "Доступ разрешен только для публикации beta версии пакета."
           else
-            echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
-            exit 1
+              echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
+              exit 1
           fi
         env:
           SELECTED_VERSION: ${{ github.event.inputs.version }}
