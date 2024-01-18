@@ -34,12 +34,20 @@ on:
           - major
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
 
     steps:
+      - name: Check permissions
+        if: ${{ contains(fromJSON('["SiebenSieben","reme3d2y","Valeri8888","v-gevak"]'), github.actor) == false }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed("you don't have permission to run this workflow!");
+
+
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
       - name: Checkout
         uses: actions/checkout@v3
@@ -64,10 +72,10 @@ jobs:
         run: yarn build
 
       # Установка npm токена для возможности публикации.
-      - name: Set NPM Token
+      - name: Set npm token
         uses: filipstefansson/set-npm-token-action@v1
         with:
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
@@ -91,7 +99,6 @@ jobs:
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           SELECTED_VERSION: ${{ github.event.inputs.version }}
-          REGISTRY: https://registry.npmjs.org
 
       # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
       - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
