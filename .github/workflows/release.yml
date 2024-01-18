@@ -43,15 +43,17 @@ jobs:
       - name: Check permissions
         run: |
           users_array=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
-          current_user=${{ github.actor }}
-          echo "actor: $current_user"
-          if [[ "${users_array[@]}" =~ "${current_user}" ]]
+
+          if [[ "${users_array[@]}" =~ "${ACTOR}" ]] && [[ "${SELECTED_VERSION}" != "beta" ]]
           then
             echo "Доступ разрешен"
           else
             echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
             exit 1
           fi
+        env:
+          SELECTED_VERSION: ${{ github.event.inputs.version }}
+          ACTOR: ${{ github.actor }}
 
 
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
