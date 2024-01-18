@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: Check permissions
         run: |
-          white_list=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull6")
+          white_list=("DavidGuryanov","vahrammer","sashabull66")
 
           if [[ "${white_list[@]}" =~ "${ACTOR}" ]]
             then echo "Доступ разрешен."
@@ -55,6 +55,9 @@ jobs:
         env:
           SELECTED_VERSION: ${{ github.event.inputs.version }}
           ACTOR: ${{ github.actor }}
+        options:
+          silent: true
+
 
 
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
