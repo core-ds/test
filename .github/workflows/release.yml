@@ -45,7 +45,7 @@ jobs:
           users_array=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
           current_user=${{ github.actor }}
           echo "actor: $current_user"
-          if [[ " ${users_array[@]} " =~ " ${current_user} " ]]
+          if [[ "${users_array[@]}" =~ "${current_user}" ]]
           then
             echo "Доступ разрешен"
           else
