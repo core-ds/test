@@ -42,10 +42,17 @@ jobs:
     steps:
       - name: Check permissions
         run: |
-          if [ $(contains fromJSON '["SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66"]' github.actor) == false ]
-            then
-              echo "Доступ разрешен"
+          users_array=("SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66")
+          current_user=${{ github.actor }}
+
+          if [[ " ${users_array[@]} " =~ " ${current_user} " ]]
+          then
+            echo "Доступ разрешен"
+          else
+            echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
+            exit 1
           fi
+
 
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
       - name: Checkout
