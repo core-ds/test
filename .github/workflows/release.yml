@@ -42,12 +42,10 @@ jobs:
     steps:
       - name: Check permissions
         run: |
-          if [[ contains(fromJSON('["SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66"]'), github.actor) == false ]]
+          if [ $(contains fromJSON '["SiebenSieben","reme3d2y","Valeri8888","v-gevak","sashabull66"]' github.actor) == false ]
             then
               echo "Доступ разрешен"
           fi
-
-
 
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
       - name: Checkout
