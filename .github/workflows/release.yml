@@ -46,7 +46,7 @@ jobs:
 
           if [[ "${white_list[@]}" =~ "${ACTOR}" ]]
             then echo "Доступ разрешен."
-          elif [[ "${action}" == "beta" ]]
+          elif [[ "${SELECTED_VERSION}" == "beta" ]]
             then echo "Доступ разрешен только для публикации beta версии пакета."
           else
               echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
