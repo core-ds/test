@@ -36,10 +36,11 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
 
     steps:
+
+      # Проверка прав доступа. Только пользователь из white_list может выполнить релизную сборку.
+      # Остальные могут только выпустить beta версию пакета.
       - name: Check permissions
         run: |
           white_list=("DavidGuryanov","vahrammer","sashabull66")
@@ -49,16 +50,12 @@ jobs:
           elif [[ "${SELECTED_VERSION}" == "beta" ]]
             then echo "Доступ разрешен только для публикации beta версии пакета."
           else
-              echo "Вы не можете выполнить данный скрипт. Доступ запрещен!"
+              echo "Вы не можете выполнить выпуск $SELECTED_VERSION версии пакета. Доступ запрещен!"
               exit 1
           fi
         env:
           SELECTED_VERSION: ${{ github.event.inputs.version }}
           ACTOR: ${{ github.actor }}
-        options:
-          silent: true
-
-
 
       # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
       - name: Checkout
@@ -87,7 +84,7 @@ jobs:
       - name: Set npm token
         uses: filipstefansson/set-npm-token-action@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
