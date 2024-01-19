@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test-version",
-    "version": "23.0.0",
+    "version": "23.0.2",
     "main": "",
     "repository": {
         "type": "git",
@@ -15,7 +15,7 @@
         "compile:copy-resources": "yarn copyfiles -e \"**/*.{[jt]s*(x),snap}\" -e \"**/*.json\" -e \"src/mock/**/*\" -u 1 \"src/**/*\" .publish",
         "compile:clean": "shx rm -rf .publish",
         "compile:ts": "tsc --project tsconfig.build.json",
-        "create-release-commit": "git add package.json CHANGELOG.md && git commit -m \"$MESSAGE\" && git push origin \"$BRANCH\"",
+        "create-release-commit": "git add package.json CHANGELOG.md && git commit -m \"$MESSAGE\" && git push --force origin \"$BRANCH\"",
         "lint:scripts": "eslint \"**/*.{js,jsx,ts,tsx}\" --ext .js,.jsx,.ts,.tsx",
         "lint": "yarn lint:scripts && prettier --check \"./src/*.{ts,tsx,js,jsx,json}\"",
         "lint:fix": "yarn lint:scripts --fix",
