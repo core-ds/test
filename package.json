@@ -97,5 +97,8 @@
     },
     "commitlint": {
         "extends": "./node_modules/arui-presets-lint/commitlint"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
     }
 }
