@@ -7,6 +7,15 @@ function postReleaseMessage {
   echo "$BRANCH"
   echo "$CHANGELOG"
   echo "$REPOSITORY"
+  echo "{
+             \"tag_name\": \"$VERSION\",
+             \"target_commitish\": \"$BRANCH\",
+             \"name\": \"$VERSION\",
+             \"body\": \"$CHANGELOG\",
+             \"draft\": false,
+             \"prerelease\": false,
+             \"generate_release_notes\": false
+           }"
 
   curl -L \
     -X POST \
