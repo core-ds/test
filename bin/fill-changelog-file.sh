@@ -60,21 +60,25 @@ $Changelog
 function postReleaseMessage {
   BODY=$(echo "$Changelog" | jq -sR '')
 
-  curl -L \
-      -X POST \
-      -H "Accept: application/vnd.github+json" \
-      -H "Authorization: Bearer $BOT_TOKEN" \
-      -H "X-GitHub-Api-Version: 2022-11-28" \
-      "https://api.github.com/repos/$REPOSITORY/releases" \
-      -d "{
-        \"tag_name\": \"$VERSION\",
-        \"target_commitish\": \"$BRANCH\",
-        \"name\": \"$VERSION\",
-        \"body\": $BODY,
-        \"draft\": false,
-        \"prerelease\": false,
-        \"generate_release_notes\": false
-      }"
+  response=$(
+    curl -L \
+        -X POST \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer $BOT_TOKEN" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        "https://api.github.com/repos/$REPOSITORY/releases" \
+        -d "{
+          \"tag_name\": \"$VERSION\",
+          \"target_commitish\": \"$BRANCH\",
+          \"name\": \"$VERSION\",
+          \"body\": $BODY,
+          \"draft\": false,
+          \"prerelease\": false,
+          \"generate_release_notes\": false
+        }"
+  )
+
+  echo "$response"
 }
 
 
