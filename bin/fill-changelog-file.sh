@@ -56,7 +56,7 @@ fullChangelogInfo="$Title
 $Changelog
 "
 
-# Отправляет запрос о релизе в github release API
+# Отправляет запрос о релизе и содержимое .public в github release API
 function postReleaseMessage {
   BODY=$(echo "$Changelog" | jq -sR '')
 
@@ -78,11 +78,11 @@ function postReleaseMessage {
         }"
   )
 
-  release_id=$(echo "$response" | jq -r '.id')
+  RELEASE_ID=$(echo "$response" | jq -r '.id')
 
-  FILENAME="release_$VERSION"
+  ARCHIVE_NAME="release_$VERSION.zip"
 
-  zip -r "$FILENAME" .publish/
+  zip -r "$ARCHIVE_NAME" .publish/
 
   curl -L \
     -X POST \
@@ -90,8 +90,8 @@ function postReleaseMessage {
     -H "Authorization: Bearer $BOT_TOKEN" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
     -H "Content-Type: application/octet-stream" \
-    "https://uploads.github.com/repos/$REPOSITORY/releases/$release_id/assets?name=$FILENAME" \
-    --data-binary "@$FILENAME"
+    "https://uploads.github.com/repos/$REPOSITORY/releases/$RELEASE_ID/assets?name=$ARCHIVE_NAME" \
+    --data-binary "@$ARCHIVE_NAME"
 }
 
 
