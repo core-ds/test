@@ -18,7 +18,7 @@ on:
 
 
 jobs:
-  publish:
+  notify:
     runs-on: ubuntu-latest
 
     steps:
