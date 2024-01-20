@@ -70,7 +70,7 @@ function postReleaseMessage {
         \"tag_name\": \"$VERSION\",
         \"target_commitish\": \"$BRANCH\",
         \"name\": \"$VERSION\",
-        \"body\": \"$BODY\",
+        \"body\": $BODY,
         \"draft\": false,
         \"prerelease\": false,
         \"generate_release_notes\": false
