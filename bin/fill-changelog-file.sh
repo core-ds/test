@@ -72,7 +72,7 @@ function postReleaseMessage {
       \"prerelease\": false,
       \"generate_release_notes\": false
     }" \
-    "https://api.github.com/$REPOSITORY/releases"
+    https://api.github.com/core-ds/test/releases
 }
 
 
