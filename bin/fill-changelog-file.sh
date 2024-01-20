@@ -78,7 +78,8 @@ function postReleaseMessage {
         }"
   )
 
-  echo "$response"
+  release_id=$(echo "$response" | jq -r '.id')
+    echo "Release ID: $release_id"
 }
 
 
