@@ -1,3 +1,10 @@
+### 26.0.1 ([62536eb](https://github.com/core-ds/test/commit/62536eb)) (20-01-2024)
+
+### Bug Fixes
+- Тестовый выпуск баги фикс инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 # 26.0.0 ([5ac1aca](https://github.com/core-ds/test/commit/5ac1aca)) (20-01-2024)
 
 ### Features
