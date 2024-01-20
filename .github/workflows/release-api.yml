@@ -10,6 +10,12 @@ on:
         description: changelog
         default: ''
 
+      # Input для ввода features changes (для CHANGELOG.md)
+      version:
+        type: text
+        description: version
+        default: '0.0.1'
+
 
 jobs:
   publish:
@@ -36,6 +42,7 @@ jobs:
         run: yarn notify
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
-          FEATURES: ${{ github.event.inputs.features }}
+          CHANGELOG: ${{ github.event.inputs.features }}
+          VERSION: ${{ github.event.inputs.version }}
           BOT_TOKEN: ${{ secrets.BOT_AUTH_TOKEN }}
           REPOSITORY: ${{ github.repository }}

@@ -6,6 +6,7 @@ function postReleaseMessage {
   echo "$VERSION"
   echo "$BRANCH"
   echo "$CHANGELOG"
+  echo "$REPOSITORY"
 
   curl -L \
     -X POST \
