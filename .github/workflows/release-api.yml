@@ -1,0 +1,41 @@
+name: ReleaseAPI
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      # Input для ввода features changes (для CHANGELOG.md)
+      features:
+        type: text
+        description: changelog
+        default: ''
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Переключение на выбранную при запуске action ветку и скачивание файлов в окружение.
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Установка учётных данных bot как gitUser в текущем окружении (для release commit).
+      # Извлечение имени текущей ветки.
+      # Извлечение sha последнего commit из выбранной ветки (нужно для построения версии beta).
+      - name: Git config
+        run: |
+          git config user.name ${{ secrets.BOT_USERNAME }}
+          git config user.email ${{ secrets.BOT_EMAIL }}
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        id: branch
+
+      # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
+      - name: Notify github about release
+        run: yarn notify
+        env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
+          FEATURES: ${{ github.event.inputs.features }}
+          BOT_TOKEN: ${{ secrets.BOT_AUTH_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
