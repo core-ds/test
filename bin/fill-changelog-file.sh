@@ -58,6 +58,18 @@ $Changelog
 
 # Отправляет запрос о релизе в github release API
 function postReleaseMessage {
+  echo "START"
+  echo "{
+               \"tag_name\": \"$VERSION\",
+               \"target_commitish\": \"$BRANCH\",
+               \"name\": \"$VERSION\",
+               \"body\": \"$Changelog\",
+               \"draft\": false,
+               \"prerelease\": false,
+               \"generate_release_notes\": false
+             }"
+  echo "FINISH"
+
   curl -L \
       -X POST \
       -H "Accept: application/vnd.github+json" \
