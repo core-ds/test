@@ -1,3 +1,18 @@
+# 25.0.0 ([6f550bf](https://github.com/core-ds/test/commit/6f550bf)) (20-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### Bug Fixes
+- Тестовый выпуск баги фикс инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### BREAKING CHANGES
+- Тестовый выпуск ломающие правки инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 ## 24.2.0 ([e3deaee](https://github.com/core-ds/test/commit/e3deaee)) (20-01-2024)
 
 ### Features
