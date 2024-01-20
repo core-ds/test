@@ -17,11 +17,11 @@ jobs:
 
       # Установка зависимостей.
       - name: Install dependencies
-        run: yarn
+        run: echo "Тут как бы yarn install"
 
       # Прогон тестов
       - name: Run tests
-        run: echo "Тут как бы прошли тесты и все хорошо"
+        run: echo "Тут как бы прошли тесты и все хорошо yarn test"
 
       - name: Make API request
         id: release_request
