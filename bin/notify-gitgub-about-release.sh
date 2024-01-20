@@ -22,7 +22,7 @@ function postReleaseMessage {
     -H "Accept: application/vnd.github+json" \
     -H "Authorization: Bearer $BOT_TOKEN" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
-    https://api.github.com/core-ds/test/releases \
+    https://api.github.com/repos/core-ds/test/releases \
     -d "{
       \"tag_name\": \"$VERSION\",
       \"target_commitish\": \"$BRANCH\",
@@ -33,6 +33,5 @@ function postReleaseMessage {
       \"generate_release_notes\": false
     }"
 }
-
 
 postReleaseMessage
