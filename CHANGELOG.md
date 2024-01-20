@@ -1,3 +1,18 @@
+## 24.2.0 ([e3deaee](https://github.com/core-ds/test/commit/e3deaee)) (20-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### Bug Fixes
+- Тестовый выпуск баги фикс инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+### BREAKING CHANGES
+- Тестовый выпуск ломающие правки инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 ### 24.1.1 ([f3714d9](https://github.com/core-ds/test/commit/f3714d9)) (20-01-2024)
 
 ### Features
