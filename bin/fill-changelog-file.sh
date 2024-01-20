@@ -58,17 +58,7 @@ $Changelog
 
 # Отправляет запрос о релизе в github release API
 function postReleaseMessage {
-  echo "START"
-  echo "{
-               \"tag_name\": \"$VERSION\",
-               \"target_commitish\": \"$BRANCH\",
-               \"name\": \"$VERSION\",
-               \"body\": \"$Changelog\",
-               \"draft\": false,
-               \"prerelease\": false,
-               \"generate_release_notes\": false
-             }"
-  echo "FINISH"
+  BODY=$(echo "$Changelog" | jq -sR '')
 
   curl -L \
       -X POST \
@@ -80,7 +70,7 @@ function postReleaseMessage {
         \"tag_name\": \"$VERSION\",
         \"target_commitish\": \"$BRANCH\",
         \"name\": \"$VERSION\",
-        \"body\": \"$Changelog\",
+        \"body\": \"$BODY\",
         \"draft\": false,
         \"prerelease\": false,
         \"generate_release_notes\": false
