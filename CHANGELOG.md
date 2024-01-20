@@ -1,3 +1,10 @@
+# 26.0.0 ([5ac1aca](https://github.com/core-ds/test/commit/5ac1aca)) (20-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 ## 25.1.0 ([1de26a7](https://github.com/core-ds/test/commit/1de26a7)) (20-01-2024)
 
 ### Features
