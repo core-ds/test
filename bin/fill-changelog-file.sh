@@ -56,7 +56,7 @@ fullChangelogInfo="$Title
 $Changelog
 "
 
-# Отправляет запрос о релизе и содержимое .public в github release API
+# Отправляет запрос о релизе и содержимое .public в github release
 function postReleaseMessage {
   BODY=$(echo "$Changelog" | jq -sR '')
 
@@ -82,7 +82,7 @@ function postReleaseMessage {
 
   ARCHIVE_NAME="release_$VERSION.zip"
 
-  zip -r "$ARCHIVE_NAME" .publish/
+  zip -r "$ARCHIVE_NAME" .publish/*
 
   curl -L \
     -X POST \
