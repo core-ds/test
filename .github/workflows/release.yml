@@ -127,3 +127,4 @@ jobs:
           BUGFIXES: ${{ github.event.inputs.bugfixes }}
           BREAKING_CHANGES: ${{ github.event.inputs.breaking-changes }}
           BOT_TOKEN: ${{ secrets.BOT_AUTH_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
