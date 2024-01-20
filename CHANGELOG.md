@@ -1,4 +1,5 @@
 ## 27.1.0 ([d1b0f79](https://github.com/core-ds/test/commit/d1b0f79)) (20-01-2024)
+- Фикс линтовой ошибки на registry
 
 ### Features
 - Тестовый выпуск features инфа.
@@ -115,6 +116,7 @@
 - И еще инфа в посл раз
 
 # 23.0.0 ([f2cbb95](https://github.com/core-ds/test/commit/f2cbb95)) (17-01-2024)
+
 
 ### Bug Fixes
 - Фикс линтовой ошибки на registry
