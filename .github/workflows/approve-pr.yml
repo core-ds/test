@@ -5,6 +5,7 @@ on:
     branches:
       - 'release-*.*.*' # Фильтр на ветки с началом release-
 
+
 jobs:
   create_and_approve_pull_request:
     runs-on: ubuntu-latest
@@ -17,7 +18,7 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           commit-message: "Created pull request"
           title: "Pull Request Title"
           body: "Pull Request Description"
@@ -25,7 +26,13 @@ jobs:
           base: "master"
 
       - name: Approve Pull Request
-        uses: tibdex/github-approve-pr-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request: ${{ steps.create_pr.outputs.pull-request }}
+        run: |
+          pull_request_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create_pr.outputs.pull-request }}"
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "${pull_request_url}/reviews" \
+            -d '{
+              "event": "APPROVE"
+            }'
+
