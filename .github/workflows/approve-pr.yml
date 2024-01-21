@@ -1,13 +1,12 @@
-name: Create and Approve Pull Request
+name: Create Pull Request
 
 on:
   push:
     branches:
-      - 'release-*.*.*' # Фильтр на ветки с началом release-
-
+      - 'release-*.*.*'
 
 jobs:
-  create_and_approve_pull_request:
+  create_pull_request:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +22,7 @@ jobs:
           title: "Pull Request Title"
           body: "Pull Request Description"
           branch: "${{ github.event.ref }}"
-          base: "master"
+          base: "main"
 
       - name: Approve Pull Request
         run: |
@@ -35,4 +34,3 @@ jobs:
             -d '{
               "event": "APPROVE"
             }'
-
