@@ -39,6 +39,7 @@ function generateChangelogInfo {
   echo "$ChangelogInfo$new_line"
 };
 
+
 # Передает в summary информацию о Features, Bug Fixes, BREAKING CHANGES, или об ее отсутствии
 function checkAvailabilityInformationForChangelog {
   if [[ ${#FEATURES} -eq 0 && ${#BUGFIXES} -eq 0 && ${#BREAKING_CHANGES} -eq 0  ]]
