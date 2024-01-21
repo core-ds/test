@@ -5,6 +5,7 @@ on:
     branches:
       - 'release-*.*.*' # Фильтр на ветки с началом release-
 
+
 jobs:
   create_and_approve_pull_request:
     runs-on: ubuntu-latest
