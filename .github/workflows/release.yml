@@ -115,11 +115,11 @@ jobs:
         run: |
           export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
           export MESSAGE="Релиз версии $VERSION"
+          export BRANCH="release-$VERSION"
 
           yarn changelog
           yarn create-release-commit
         env:
-          BRANCH: ${{ steps.branch.outputs.branch }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
