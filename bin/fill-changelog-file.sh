@@ -82,7 +82,7 @@ function postReleaseMessage {
 
   ARCHIVE_NAME="release_$VERSION.zip"
 
-  zip -r "$ARCHIVE_NAME" .publish/*
+  zip -j "$ARCHIVE_NAME" .publish/*
 
   curl -L \
     -X POST \
@@ -93,7 +93,6 @@ function postReleaseMessage {
     "https://uploads.github.com/repos/$REPOSITORY/releases/$RELEASE_ID/assets?name=$ARCHIVE_NAME" \
     --data-binary "@$ARCHIVE_NAME"
 }
-
 
 postReleaseMessage
 
