@@ -117,7 +117,10 @@ jobs:
           export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
           export MESSAGE="Релиз версии $VERSION"
           export RELEASE_BRANCH="release-$VERSION"
+
           echo "RELEASE_BRANCH=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
           yarn changelog
 
@@ -141,8 +144,8 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
-          commit-message: "Created pull request"
-          title: "Pull Request Title"
-          body: "Pull Request Description"
+          commit-message: ${{ steps.changelog.outputs.MESSAGE }}
+          title: ${{ steps.changelog.outputs.MESSAGE }}
+          body: Этот PR создан автоматически после публикации версии ${{ steps.changelog.outputs.VERSION }} библиотеки.
           branch: ${{ steps.changelog.outputs.RELEASE_BRANCH }}
-          base: "main"
+          base: ${{ steps.branch.outputs.branch }}
