@@ -123,6 +123,7 @@ jobs:
           git add package.json CHANGELOG.md
           git commit -m "$MESSAGE"
           git push --set-upstream origin "$RELEASE_BRANCH"
+          git request-pull origin/"$BRANCH" "$RELEASE_BRANCH"
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
