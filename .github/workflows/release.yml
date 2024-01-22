@@ -123,7 +123,6 @@ jobs:
           git add package.json CHANGELOG.md
           git commit -m "$MESSAGE"
           git push --set-upstream origin "$RELEASE_BRANCH"
-          git request-pull origin/"$BRANCH" "$RELEASE_BRANCH"
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
@@ -134,3 +133,14 @@ jobs:
           BREAKING_CHANGES: ${{ github.event.inputs.breaking-changes }}
           BOT_TOKEN: ${{ secrets.BOT_AUTH_TOKEN }}
           REPOSITORY: ${{ github.repository }}
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          commit-message: "Created pull request"
+          title: "Pull Request Title"
+          body: "Pull Request Description"
+          branch: "${{ github.event.ref }}"
+          base: "main"
