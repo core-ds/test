@@ -1,3 +1,10 @@
+### 30.0.3 ([2d01418](https://github.com/core-ds/test/commit/2d01418)) (21-01-2024)
+
+### Features
+- Тестовый выпуск features инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 # 28.0.0 ([1557d98](https://github.com/core-ds/test/commit/1557d98)) (20-01-2024)
 
 ### Features
