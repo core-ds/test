@@ -115,15 +115,16 @@ jobs:
         run: |
           export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
           export MESSAGE="Релиз версии $VERSION"
-          export BRANCH="release-$VERSION"
+          export RELEASE_BRANCH="release-$VERSION"
 
           yarn changelog
 
-          git checkout -b "$BRANCH"
+          git checkout -b "$RELEASE_BRANCH"
           git add package.json CHANGELOG.md
           git commit -m "$MESSAGE"
-          git push --set-upstream origin "$BRANCH"
+          git push --set-upstream origin "$RELEASE_BRANCH""
         env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
           SEMANTIC_VERSION: ${{ github.event.inputs.version }}
