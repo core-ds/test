@@ -1,3 +1,10 @@
+## 30.1.0 ([81addb2](https://github.com/core-ds/test/commit/81addb2)) (21-01-2024)
+
+### BREAKING CHANGES
+- Тестовый выпуск ломающие правки инфа.
+- Еще инфа.
+- И еще инфа в посл раз
+
 # 28.0.0 ([1557d98](https://github.com/core-ds/test/commit/1557d98)) (20-01-2024)
 
 ### Features
