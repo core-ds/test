@@ -112,10 +112,12 @@ jobs:
       # Заполнение файла changelog и выполнение release commit && push в релизную ветку.
       - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
         if: github.event.inputs.version != 'beta'
+        id: changelog
         run: |
           export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
           export MESSAGE="Релиз версии $VERSION"
           export RELEASE_BRANCH="release-$VERSION"
+          echo "$RELEASE_BRANCH" >> $GITHUB_OUTPUT
 
           yarn changelog
 
@@ -142,5 +144,5 @@ jobs:
           commit-message: "Created pull request"
           title: "Pull Request Title"
           body: "Pull Request Description"
-          branch: "${{ github.event.ref }}"
+          branch: ${{ steps.branch.outputs.RELEASE_BRANCH }}
           base: "main"
