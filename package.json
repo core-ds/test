@@ -1,7 +1,7 @@
 {
     "license": "UNLICENSED",
     "name": "@alfalab/bridge-to-am-test-version",
-    "version": "29.0.2",
+    "version": "30.0.0",
     "main": "",
     "repository": {
         "type": "git",
