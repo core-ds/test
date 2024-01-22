@@ -109,7 +109,7 @@ jobs:
           BRANCH: ${{ steps.branch.outputs.branch }}
           SELECTED_VERSION: ${{ github.event.inputs.version }}
 
-      # Заполнение файла changelog и выполнение release commit && push в выбранную ветку.
+      # Заполнение файла changelog и выполнение release commit && push в релизную ветку.
       - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
         if: github.event.inputs.version != 'beta'
         run: |
@@ -118,7 +118,11 @@ jobs:
           export BRANCH="release-$VERSION"
 
           yarn changelog
-          yarn create-release-commit
+
+          git checkout -b "$BRANCH"
+          git add package.json CHANGELOG.md
+          git commit -m "$MESSAGE"
+          git push --set-upstream origin "$BRANCH"
         env:
           LAST_COMMIT_URL: https://github.com/${{ github.repository }}/commit/${{ steps.branch.outputs.sha_short }}
           SHA_SHORT: ${{ steps.branch.outputs.sha_short }}
