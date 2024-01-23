@@ -84,7 +84,7 @@ jobs:
       - name: Set npm token
         uses: filipstefansson/set-npm-token-action@v1
         with:
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
 
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
