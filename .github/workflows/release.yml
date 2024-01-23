@@ -68,12 +68,14 @@ jobs:
         run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
-          echo "//registry.npmjs.org/:_authToken=$TOKEN" > .npmrc
+          npm config set "@$REPOSITORY:registry" https://registry.npmjs.org
+          npm config set //registry.npmjs.org/:_authToken $TOKEN
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         id: branch
         env:
           TOKEN: ${{ secrets.NPM_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
 
       # Установка зависимостей.
       - name: Install dependencies
@@ -86,8 +88,6 @@ jobs:
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
         run: |
-          npm config get registry
-
           export TAG="latest"
           export VERSION="$SELECTED_VERSION"
 
