@@ -10,7 +10,6 @@
     "scripts": {
         "build": "yarn compile",
         "changelog": "bash bin/fill-changelog-file.sh",
-        "notify": "bash bin/notify-gitgub-about-release.sh",
         "compile": "yarn compile:clean && yarn compile:ts && yarn compile:copy-resources",
         "compile:copy-package-json": "shx cp package.json .publish/package.json",
         "compile:copy-resources": "yarn copyfiles -e \"**/*.{[jt]s*(x),snap}\" -e \"**/*.json\" -e \"src/mock/**/*\" -u 1 \"src/**/*\" .publish",
