@@ -114,9 +114,9 @@ jobs:
         if: github.event.inputs.version != 'beta'
         id: changelog
         run: |
-          export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
-          export MESSAGE="Релиз версии $VERSION"
           export RELEASE_BRANCH="release-$VERSION"
+          export MESSAGE="Релиз версии $VERSION"
+          export VERSION=$(grep -o '"version": "[^"]*' package.json | awk -F'"' '{print $4}')
 
           echo "RELEASE_BRANCH=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
           echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
