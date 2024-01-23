@@ -68,15 +68,12 @@ jobs:
         run: |
           git config user.name ${{ secrets.BOT_USERNAME }}
           git config user.email ${{ secrets.BOT_EMAIL }}
-          npm config set "@$REPOSITORY:registry" https://registry.npmjs.org
-          npm config set //registry.npmjs.org/:_authToken $TOKEN
+          echo "//registry.npmjs.org/:_authToken=$TOKEN" > .npmrc
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          npm config get //registry.npmjs.org/:_authToken
         id: branch
         env:
           TOKEN: ${{ secrets.NPM_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
 
       # Установка зависимостей.
       - name: Install dependencies
