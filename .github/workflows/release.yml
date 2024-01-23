@@ -110,7 +110,7 @@ jobs:
           SELECTED_VERSION: ${{ github.event.inputs.version }}
 
       # Заполнение файла changelog и выполнение release commit && push в релизную ветку.
-      - name: Push changes to ${{ steps.branch.outputs.branch}} branch about release
+      - name: Fill changelog file and create release branch
         if: github.event.inputs.version != 'beta'
         id: changelog
         run: |
@@ -139,8 +139,9 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_AUTH_TOKEN }}
           REPOSITORY: ${{ github.repository }}
 
-      - name: Create Pull Request
-        id: create_pr
+      # Создание pull request из релизной ветки в целевую.
+      - name: Create release pull request
+        if: github.event.inputs.version != 'beta'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
