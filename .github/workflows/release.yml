@@ -86,6 +86,8 @@ jobs:
       # Публикация выбранной версии в npm.
       - name: Publish ${{ github.event.inputs.version }} version
         run: |
+          npm config get registry
+
           export TAG="latest"
           export VERSION="$SELECTED_VERSION"
 
